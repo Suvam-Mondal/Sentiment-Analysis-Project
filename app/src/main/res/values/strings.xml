@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rezensent</string>
+    <string name="your_string_here">Select a topic<u>underline</u>.</string>
+    <string name="register"><u><b>Select a topic</b></u></string>
+</resources>
