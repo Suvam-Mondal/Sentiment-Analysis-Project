@@ -2,13 +2,13 @@
 The project is to develop an Android app which will determine the sentiment of the texts obtained from reviews from Twitter.
 
 ## Instructions
-1.Before building the apk, put your Twitter Consumer and Secret Key in the MainActivity.java
-2.Build the apk
-3.Run the app on your phone
-4.Enter your Twitter User ID and password
-5.Select a topic (eg. Politics)
-6.Enter your search text ( eg. Donald Trump) and click Search
-7.Click Review to see the result
+1.Before building the apk, put your Twitter Consumer and Secret Key in the MainActivity.java</br>
+2.Build the apk</br>
+3.Run the app on your phone</br>
+4.Enter your Twitter User ID and password</br>
+5.Select a topic (eg. Politics)</br>
+6.Enter your search text ( eg. Donald Trump) and click Search</br>
+7.Click Review to see the result</br>
 
 ## App Screenshots
 
