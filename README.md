@@ -10,11 +10,12 @@ The project is to develop an Android app which will determine the sentiment of t
 6.Enter your search text ( eg. Donald Trump) and click Search
 7.Click Review to see the result
 
-##App Screenshots
-![Alt text](Sentiment-Analysis-Project/Screenshot_20170501-143227.png)
+## App Screenshots
 
-![Alt text](Sentiment-Analysis-Project/Screenshot_20170501-143238.png)
+![Select Topic](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/Screenshot_20170501-143227.png)
 
-![Alt text](Sentiment-Analysis-Project/18191577_1585123341552492_2020604198_n.png)
+![Enter Search](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/Screenshot_20170501-143238.png)
 
-![Alt text](Sentiment-Analysis-Project/18191584_1585123338219159_601556890_n.png)
+![See Tweets](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/18191577_1585123341552492_2020604198_n.png)
+
+![Result](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/18191584_1585123338219159_601556890_n.png)
