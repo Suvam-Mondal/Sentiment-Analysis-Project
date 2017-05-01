@@ -12,10 +12,10 @@ The project is to develop an Android app which will determine the sentiment of t
 
 ## App Screenshots
 
-![Select Topic](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/Screenshot_20170501-143227.png)
+<img src="https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/Screenshot_20170501-143227.png" height="480" width="320">
 
-![Enter Search](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/Screenshot_20170501-143238.png)
+<img src="https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/Screenshot_20170501-143238.png" height="480" width="320">
 
-![See Tweets](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/18191577_1585123341552492_2020604198_n.png)
+<img src="https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/18191577_1585123341552492_2020604198_n.png" height="480" width="320">
 
-![Result](https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/18191584_1585123338219159_601556890_n.png)
+<img src="https://github.com/Suvam-Mondal/Sentiment-Analysis-Project/blob/master/18191584_1585123338219159_601556890_n.png" height="480" width="320">
