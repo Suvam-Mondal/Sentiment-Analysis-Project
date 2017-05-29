@@ -17,8 +17,26 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:id="@+id/button"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="138dp"
-        android:background="@drawable/mybutton"/>
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/textView8"
+        android:layout_marginBottom="19dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="69dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Searches:"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/lv"
+        android:layout_marginStart="17dp" />
 </RelativeLayout>
