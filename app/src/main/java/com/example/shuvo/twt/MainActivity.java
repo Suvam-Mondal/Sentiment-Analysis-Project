@@ -31,8 +31,8 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TWITTER_KEY = "YOUR_TWITTER_CONSUMER_KEY"; // Use your twitter Consumer Key
-    private static final String TWITTER_SECRET = "YOUR_TWITTER_SECRET_KEY"; // Use your twitter Secret Key
+    private static final String TWITTER_KEY = "s5m8Et0hiUPhCxMlMDofpwGtb"; // Use your twitter Consumer Key
+    private static final String TWITTER_SECRET = "14pwt8O6Z0WZJFJMhLddu0PnX1qe0yhB33xAEi0FfrMULlDLVQ"; // Use your twitter Secret Key
     private TwitterLoginButton loginButton;
 
     @Override
@@ -71,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
             OutputStream out= openFileOutput("politics.txt", Context.MODE_PRIVATE);
             IOUtils.copy(databaseInputStream3, out);
             databaseInputStream1.close();
+            out.close();
+        }
+        catch (IOException e){}
+
+
+        InputStream databaseInputStream7 = getResources().openRawResource(R.raw.negetivekeywords);
+        try {
+            File file = new File(getBaseContext().getFilesDir(), "negetivekeywords.txt");
+            OutputStream out= openFileOutput("negetivekeywords.txt", Context.MODE_PRIVATE);
+            IOUtils.copy(databaseInputStream7, out);
+            databaseInputStream7.close();
             out.close();
         }
         catch (IOException e){}

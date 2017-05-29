@@ -1,5 +1,7 @@
 package com.example.shuvo.twt;
 
+import android.content.Context;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,9 +32,9 @@ class KeyGen{
         return -1;
     }
 
-    public static boolean isSilly(String s){
+    public static boolean isSilly(String s, Context ctx){
         try{
-            FileInputStream fis = new FileInputStream("negetivekeywords.txt");
+            FileInputStream fis = ctx.openFileInput("negetivekeywords.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             String line = null;
             line = br.readLine();
@@ -51,7 +53,7 @@ class KeyGen{
         return false;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args,Context ctx){
 
 		/* Intialize the Key array */
         Key[] keys = new Key[4000];
@@ -60,7 +62,8 @@ class KeyGen{
         }
 
         try{
-            FileInputStream fis = new FileInputStream(args[0]);
+           // FileInputStream fis = new FileInputStream(args[0]);
+            FileInputStream fis = ctx.openFileInput(args[0]);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             int cl_type, i=0, j;
             String line = null;
@@ -79,7 +82,7 @@ class KeyGen{
 
 				/* token[] stores the array of Keywords */
                 for(String s : tokens){
-                    if(s.length()>1 && !isSilly(s)){
+                    if(s.length()>1 && !isSilly(s,ctx)){
                         if(s.length()>1 && (i==0 || exists(keys,s)==-1) ){
                             //System.out.println(s + s.length());
                             keys[i].key=s;

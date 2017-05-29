@@ -1,12 +1,15 @@
 package com.example.shuvo.twt;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.*;
 import java.util.*;
 
 public class nbayes{
 
     public static double cprob(double x[], double[] y){
-
+    /* x is train y is test */
         double d=1, diff;
         for(int i=0;i<x.length;i++){
             if((x[i]!=0 && y[i]!=0) )
@@ -16,6 +19,7 @@ public class nbayes{
     }
 
     public static int main(double[][] d,double[] test){
+
 
         double d0=0, d1=0;
 

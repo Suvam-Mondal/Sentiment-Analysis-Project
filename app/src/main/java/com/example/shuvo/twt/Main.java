@@ -2,38 +2,40 @@ package com.example.shuvo.twt;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.SystemClock;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
+import retrofit.RestAdapter;
+
 class Main{
     static class Keys{
         static String[] keys;
         public static void getKeys(Context ctx){
             try{
-                //File dir = new File("/sdcard/");
-                //File fpath = new File(dir,"positivekeywords.txt");
-                //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fpath)));
-
                 FileInputStream fis = ctx.openFileInput("positivekeywords.txt");
                 BufferedReader br = new BufferedReader(new InputStreamReader(fis));
                 String line;
                 line = br.readLine();
                 keys = line.split(" ");
+                br.close();
+
             }
             catch(Exception E){
             }
         }
     }
 
-    public static double[] generateHist(String S[]){
+    public static double[] generateHist(String S[],Context ctx){
         try{
             double[] hist = new double[Keys.keys.length];
             int n=0;
             for(String t:S){
-                boolean val = KeyGen.isSilly(t);
+                boolean val = KeyGen.isSilly(t,ctx);
                 if(!val){
                     int i=0;
                     for(String k:Keys.keys){
@@ -50,7 +52,7 @@ class Main{
             }
             for(int i=0;i<hist.length;i++){
                 if(hist[i]>0)
-                    hist[i]=hist[i]/n+1;
+                    hist[i]=hist[i]/n;
             }
             return hist;
         }
@@ -58,6 +60,32 @@ class Main{
             return null;
         }
     }
+
+   /* public static int isNegation(String[] s,Context ctx){
+        int count=0;
+        try{
+            FileInputStream fis = ctx.openFileInput("negetion.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            String line = null;
+            line = br.readLine();
+            line = line.toLowerCase();
+            String[] nwords = line.split(" ");
+            for(String g:s){
+                for(String n:nwords){
+                    if(g.equals(n)==true){
+                        count++;
+                        break;
+                    }
+                }
+            }
+            br.close();
+        }
+        catch(Exception E){
+            System.out.println(E);
+        }
+        return count%2;
+    }*/
+
 
     public static String main(Context ctx,String choice){
 
@@ -72,21 +100,21 @@ class Main{
         double[][] trainhist = new double[2][1000];
         try{
             if ((choice.toString()).equalsIgnoreCase("movies")) {
-                FileInputStream fis = ctx.openFileInput("imdb_labelled.txt");
+
+
+               FileInputStream fis = ctx.openFileInput("imdb_labelled.txt");
                 BufferedReader br = new BufferedReader(new InputStreamReader(fis));
                 String line;
-
                 while ((line = br.readLine()) != null) {
-				/* Input from file is dependent on format of source */
                     String[] columndet = line.split("\t");
                     columndet[0] = columndet[0].toLowerCase();
                     int cl_type = (Integer.parseInt(columndet[1]));
                     String delims = "[ -.,?!]+";
                     String[] s = columndet[0].split(delims);
-                    histogram = generateHist(s);
-
-                    for (int i = 0; i < 1000; i++) {
-                        trainhist[cl_type][i] += histogram[i];
+                   // int negindex = isNegation(s,ctx);
+                    histogram = generateHist(s,ctx);
+                    for(int i=0;i<1000;i++){
+                            trainhist[cl_type][i]+=histogram[i];
                     }
                     countp[cl_type]++;
                     if (count++ > (90 * max / 100))
@@ -95,6 +123,7 @@ class Main{
                 for(int i=0;i<1000;i++){
                     for(int j=0;j<2;j++){
                         trainhist[j][i] = trainhist[j][i]/countp[j];
+                       // System.out.print(trainhist[j][i]+" ");
                     }
                 }
                 fis.close();
@@ -106,17 +135,18 @@ class Main{
                 String line;
 
                 while ((line = br.readLine()) != null) {
-				/* Input from file is dependent on format of source */
                     String[] columndet = line.split("\t");
                     columndet[0] = columndet[0].toLowerCase();
                     int cl_type = (Integer.parseInt(columndet[1]));
                     String delims = "[ -.,?!]+";
                     String[] s = columndet[0].split(delims);
-                    histogram = generateHist(s);
+                   // int negindex = isNegation(s,ctx);
+                    histogram = generateHist(s,ctx);
 
-                    for (int i = 0; i < 1000; i++) {
-                        trainhist[cl_type][i] += histogram[i];
+                    for(int i=0;i<1000;i++){
+                            trainhist[cl_type][i]+=histogram[i];
                     }
+
                     countp[cl_type]++;
                     if (count++ > (90 * max / 100))
                         break;
@@ -129,20 +159,22 @@ class Main{
                 fis.close();
             }
 
-
             FileInputStream fi = ctx.openFileInput("myFile.txt");
             BufferedReader bi = new BufferedReader(new InputStreamReader(fi));
-            double ham_res=0, nbayes_res=0, euc_res=0, taxicab_res=0;
+            double nbayes_res=0;
             double[][] test = new double[1000][1000];
             count=0;
             int k=0;
+            int[] negindex = new int[100];
             String oline;
-            int[] exp_val = new int[max-count];
             while(( oline = bi.readLine())!=null){
+                String[] columndet = oline.split("\t");
+                columndet[0] = columndet[0].toLowerCase();
                 oline = oline.toLowerCase();
                 String delims = "[ -.,?!]+";
-                String[] s = oline.split(delims);
-                test[k] = generateHist(s);
+                String[] s = columndet[0].split(delims);
+                //negindex[k] = isNegation(s,ctx);
+                test[k] = generateHist(s,ctx);
                 k++;
             }
 
@@ -150,12 +182,10 @@ class Main{
 
             Double pos=0.0;
             for(int i=0;i<k;i++){
-
                 int idxmatch = nbayes.main(trainhist,test[i]);
                 if(idxmatch==1){
                     nbayes_res++;
                 }
-
                 count++;
             }
             r2 = ( nbayes_res/count)*100;
@@ -163,7 +193,7 @@ class Main{
             DecimalFormat df = new DecimalFormat("#.00");
             String angleFormated = df.format(f);
 
-            String string=" ";
+            String string="";
             string += angleFormated;
             return string;
 
@@ -174,4 +204,3 @@ class Main{
         }
     }
 }
-

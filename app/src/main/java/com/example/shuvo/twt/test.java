@@ -56,6 +56,9 @@ public class test extends AppCompatActivity implements View.OnClickListener {
         Bundle p = getIntent().getExtras();
         String choice = p.getString("choice");
         String ss=Main.main(getApplicationContext().getApplicationContext(),choice);
+
+        int length = ss.length();
+
          f=Float.valueOf(ss);
         BarData data = new BarData(getYAxisValues(), getDataSet());
         chart.getAxis(YAxis.AxisDependency.RIGHT).setEnabled(false);
@@ -67,12 +70,34 @@ public class test extends AppCompatActivity implements View.OnClickListener {
         chart.setDescription("");
         chart.animateXY(2000, 2000);
         chart.invalidate();
+
         String result =ss+"% of the tweets has positive reaction";
         SpannableString res = new SpannableString(result);
-        res.setSpan(new RelativeSizeSpan(2f),0,6,0);
-        res.setSpan(new RelativeSizeSpan(2f),26,34,0);
-        res.setSpan(new ForegroundColorSpan(Color.GREEN),26,34,0);
-        textView.setText(res);
+
+        if (length == 5) {
+            res.setSpan(new RelativeSizeSpan(2f), 0, 5, 0);
+            res.setSpan(new RelativeSizeSpan(1.5f), 25, 33, 0);
+            res.setSpan(new ForegroundColorSpan(Color.GREEN), 25, 33, 0);
+            textView.setText(res);
+        }
+        else if (length == 6){
+            res.setSpan(new RelativeSizeSpan(2f), 0, 6, 0);
+            res.setSpan(new RelativeSizeSpan(1.5f), 26, 34, 0);
+            res.setSpan(new ForegroundColorSpan(Color.GREEN), 26, 34, 0);
+            textView.setText(res);
+        }
+        else if (length == 4){
+            res.setSpan(new RelativeSizeSpan(2f), 0, 5, 0);
+            res.setSpan(new RelativeSizeSpan(1.5f), 24, 32, 0);
+            res.setSpan(new ForegroundColorSpan(Color.GREEN), 24, 32, 0);
+            textView.setText(res);
+        }
+        else if (length == 3){
+            res.setSpan(new RelativeSizeSpan(2f), 0, 4, 0);
+            res.setSpan(new RelativeSizeSpan(1.5f), 23, 31, 0);
+            res.setSpan(new ForegroundColorSpan(Color.GREEN), 23, 31, 0);
+            textView.setText(res);
+        }
         //+"% of the tweets has positive reaction"
 
     }
